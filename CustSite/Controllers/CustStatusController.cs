@@ -20,5 +20,14 @@ namespace CustSite.Controllers
             return View(db.客戶資料狀況.ToList());
 
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

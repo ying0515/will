@@ -120,6 +120,17 @@ namespace CustSite.Controllers
             return RedirectToAction("Index");
         }
 
+        public JsonResult CheckUserMail(int 客戶Id, string Email)
+        {
+            bool isValidate = false;
+
+            var fd = db.客戶聯絡人.Where(p => p.客戶Id == 客戶Id && p.Email == Email).FirstOrDefault();
+            if (fd == null)
+                isValidate = true;
+            return Json(isValidate, JsonRequestBehavior.AllowGet);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

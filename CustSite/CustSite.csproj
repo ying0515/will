@@ -199,15 +199,18 @@
     <Compile Include="Models\客戶聯絡人.cs">
       <DependentUpon>CustSiteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\客戶聯絡人Partial.cs" />
     <Compile Include="Models\客戶資料.cs">
       <DependentUpon>CustSiteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\客戶資料Partial.cs" />
     <Compile Include="Models\客戶資料狀況.cs">
       <DependentUpon>CustSiteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\客戶銀行資訊.cs">
       <DependentUpon>CustSiteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\客戶銀行資訊Partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
