@@ -19,7 +19,7 @@ namespace CustSite.Models
             [Required]
             [StringLength(8)]
             public string 統一編號 { get; set; }
-
+             
             [Required]
             [StringLength(50)]
             public string 電話 { get; set; }
@@ -32,8 +32,6 @@ namespace CustSite.Models
             
             [StringLength(250)]
             [DataType(DataType.EmailAddress)]
-            [RegularExpression(@"\w+\@\w+", ErrorMessage = "Email格式錯誤")]
-            
             public string Email { get; set; }
 
         }

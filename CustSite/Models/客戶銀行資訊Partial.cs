@@ -15,7 +15,7 @@ namespace CustSite.Models
             [Required]
             public int 客戶Id { get; set; }
 
-            [Required]
+            [Required] 
             [StringLength(50)]
             public string 銀行名稱 { get; set; }
 

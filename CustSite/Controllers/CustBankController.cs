@@ -18,7 +18,7 @@ namespace CustSite.Controllers
         public ActionResult Index()
         {
             var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
-            return View(客戶銀行資訊.ToList());
+            return View(客戶銀行資訊.Where(p => p.是否已刪除 == false).ToList());
         }
 
         // GET: CustBank/Details/5
@@ -52,6 +52,7 @@ namespace CustSite.Controllers
         {
             if (ModelState.IsValid)
             {
+                客戶銀行資訊.是否已刪除 = false;
                 db.客戶銀行資訊.Add(客戶銀行資訊);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -87,6 +88,7 @@ namespace CustSite.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(客戶銀行資訊).State = EntityState.Modified;
+                客戶銀行資訊.是否已刪除 = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -104,9 +106,9 @@ namespace CustSite.Controllers
             客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
             if (客戶銀行資訊 == null)
             {
-                return HttpNotFound();
-            }
-            return View(客戶銀行資訊);
+                return HttpNotFound(); 
+            } 
+            return View(客戶銀行資訊); 
         }
 
         // POST: CustBank/Delete/5
@@ -115,7 +117,8 @@ namespace CustSite.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
-            db.客戶銀行資訊.Remove(客戶銀行資訊);
+            客戶銀行資訊.是否已刪除 = true;
+            //db.客戶銀行資訊.Remove(客戶銀行資訊);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

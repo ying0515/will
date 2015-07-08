@@ -18,7 +18,7 @@ namespace CustSite.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            return View(db.客戶資料.ToList());
+            return View(db.客戶資料.Where(p => p.是否已刪除 == false).ToList());
         }
 
         // GET: Customer/Details/5
@@ -51,6 +51,7 @@ namespace CustSite.Controllers
         {
             if (ModelState.IsValid)
             {
+                客戶資料.是否已刪除 = false;
                 db.客戶資料.Add(客戶資料);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -84,6 +85,7 @@ namespace CustSite.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(客戶資料).State = EntityState.Modified;
+                客戶資料.是否已刪除 = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -108,15 +110,14 @@ namespace CustSite.Controllers
         // POST: Customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id) 
         {
             客戶資料 客戶資料 = db.客戶資料.Find(id);
-            db.客戶資料.Remove(客戶資料);
+            客戶資料.是否已刪除 = true; 
+            //db.客戶資料.Remove(客戶資料);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
 
 
         protected override void Dispose(bool disposing)
